@@ -42,7 +42,8 @@ export default function MainHeader() {
             onMouseLeave={() => setShowDropdown(false)}
           >
             <button className="flex items-center gap-1 hover:text-[#dbb350] transition-colors">
-              Collections <ChevronDown size={16} />
+              <Link href="/collections">Collections</Link>{" "}
+              <ChevronDown size={16} />
             </button>
 
             {/* Desktop Dropdown */}
@@ -112,19 +113,21 @@ export default function MainHeader() {
           </Link>
 
           <div>
-            <p className="mb-2">Collections</p>
-            <div className="ml-4 space-y-2">
-              {["canape", "fauteuille", "lits", "chaise"].map((item) => (
-                <Link
-                  key={item}
-                  href={`/collections/${item}`}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="block"
-                >
-                  {item.charAt(0).toUpperCase() + item.slice(1)}
-                </Link>
-              ))}
-            </div>
+            <Link href="/collections">
+              <p className="mb-2">Collections</p>
+              <div className="ml-4 space-y-2">
+                {["canape", "fauteuille", "lits", "chaise"].map((item) => (
+                  <Link
+                    key={item}
+                    href={`/collections/${item}`}
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="block"
+                  >
+                    {item.charAt(0).toUpperCase() + item.slice(1)}
+                  </Link>
+                ))}
+              </div>
+            </Link>
           </div>
 
           <Link

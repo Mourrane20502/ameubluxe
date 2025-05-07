@@ -8,6 +8,7 @@ import servicenettoyage from "../assets/service_de_nettoyage.jpg";
 import tapisserie from "../assets/tapisserie.jpg";
 import NosPartenaires from "./_components/NosPartenaires";
 import Testimonials from "./_components/Slider";
+
 export default function Page() {
   const features = [
     {
@@ -63,7 +64,7 @@ export default function Page() {
         </div>
       </section>
 
-      <section className="py-20 bg-white px-6" id="pourquoi-nous">
+      <section className="py-20 max-md:py-10 bg-white px-6" id="pourquoi-nous">
         <div className="max-w-6xl mx-auto text-center">
           <h2 className="text-3xl font-bold mb-6 text-[#ddb859]">
             Pourquoi Nous Choisir ?
@@ -94,7 +95,7 @@ export default function Page() {
           </div>
         </div>
       </section>
-      <section className="w-full py-10 bg-white" id="tapisserie">
+      <section className="w-full py-10 max-md:py-3 bg-white" id="tapisserie">
         <div className="max-w-7xl mx-auto px-6 flex flex-col lg:flex-row items-center gap-12">
           <div className="w-full lg:w-1/2">
             <Image
@@ -132,7 +133,10 @@ export default function Page() {
         </div>
       </section>
 
-      <section className="w-full py-16 bg-white" id="nettoyage-service">
+      <section
+        className="w-full py-16 max-md:py-8 bg-white"
+        id="nettoyage-service"
+      >
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex flex-col lg:flex-row items-start  gap-12">
             <div className="lg:w-1/2 text-center lg:text-left">
@@ -175,7 +179,7 @@ export default function Page() {
       <Testimonials />
       <NosPartenaires />
 
-      <section className="w-full py-16 px-4" id="contact">
+      <section className="w-full py-16 max-md:py-8 px-4" id="contact">
         <div className="flex flex-col lg:flex-row items-center gap-8">
           {/* Form  */}
           <div className="w-full lg:w-1/2 bg-white p-8 rounded-lg shadow-md max-w-xl mx-auto">
