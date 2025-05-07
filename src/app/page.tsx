@@ -127,7 +127,7 @@ export default function Page() {
               href="#contact"
               className="inline-block bg-[#ddb859] text-white px-6 py-3 rounded-full font-semibold shadow-lg hover:bg-[#c6a14a] transition-all duration-300"
             >
-              Demander un devis
+              Demander un Devis
             </a>
           </div>
         </div>
