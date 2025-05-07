@@ -46,41 +46,49 @@ export default function Testimonials() {
   const current = testimonials[index];
 
   return (
-    <section className="bg-white py-16 max-md:py-0 px-4 md:px-8">
-      <div className="max-w-3xl mx-auto text-center">
-        <h2 className="text-3xl md:text-4xl font-bold text-[#ddb859] mb-2">
+    <section
+      className="w-full bg-gradient-to-br from-white to-[#f9f7f1] py-20 px-6"
+      id="testimonials"
+    >
+      <div className="max-w-4xl mx-auto text-center">
+        <h2 className="text-4xl font-bold text-[#ddb859] mb-4">
           Ce que disent nos clients
         </h2>
-        <p className="text-gray-600 mb-8">
-          Des avis authentiques de nos clients satisfaits à travers tout le
+        <p className="text-gray-600 text-lg mb-12">
+          Des témoignages authentiques de nos clients satisfaits partout au
           Maroc.
         </p>
 
-        <div className="relative bg-white rounded-2xl shadow-xl p-6 md:p-10">
-          <p className="text-gray-700 italic mb-6">{`“${current.content}”`}</p>
+        <div className="relative bg-white border border-gray-100 rounded-3xl shadow-xl p-8 md:p-10 transition-all duration-500 ease-in-out">
+          <p className="text-gray-700 text-lg leading-relaxed italic mb-8 transition-opacity duration-500 ease-in-out">
+            “{current.content}”
+          </p>
+
           <div className="flex flex-col items-center">
             <Image
               src={current.avatar}
               alt={current.name}
-              width={106}
-              height={86}
-              className="rounded-full mb-2 object-cover border border-[#ddb859]"
+              width={80}
+              height={80}
+              className="rounded-full border-4 border-[#ddb859] mb-3 object-cover hover:scale-105 transition-transform"
             />
-            <p className="font-semibold text-gray-800">{current.name}</p>
+            <p className="font-semibold text-gray-800 text-xl">
+              {current.name}
+            </p>
             <p className="text-sm text-gray-500">{current.location}</p>
           </div>
 
-          <div className="flex justify-center gap-6 mt-6">
+          <div className="flex justify-center gap-6 mt-8">
             <button
               onClick={prev}
-              className="bg-[#ddb859] text-white rounded-full p-2 hover:bg-[#caa743] transition"
+              className="bg-[#ddb859] hover:bg-[#c7a74b] text-white p-2 rounded-full shadow-md transition"
               aria-label="Précédent"
             >
               <ChevronLeft className="w-5 h-5" />
             </button>
             <button
               onClick={next}
-              className="bg-[#ddb859] text-white rounded-full p-2 hover:bg-[#caa743] transition"
+              className="bg-[#ddb859] hover:bg-[#c7a74b] text-white p-2 rounded-full shadow-md transition"
               aria-label="Suivant"
             >
               <ChevronRight className="w-5 h-5" />

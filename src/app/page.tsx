@@ -3,7 +3,12 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Clock, ShieldCheck, Sparkles, Users } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
+import litImg from "../assets/40.jpg";
 import bgImage from "../assets/bgimage.jpg";
+import canapeImg from "../assets/canape.jpg";
+import chaiseImg from "../assets/chaise.jpg";
+import fauteuilImg from "../assets/feauteille.jpg";
 import servicenettoyage from "../assets/service_de_nettoyage.jpg";
 import tapisserie from "../assets/tapisserie.jpg";
 import NosPartenaires from "./_components/NosPartenaires";
@@ -35,7 +40,6 @@ export default function Page() {
   return (
     <>
       <section className="relative w-full h-[80vh]">
-        {/* Background Image */}
         <Image
           src={bgImage}
           alt="Background"
@@ -63,7 +67,6 @@ export default function Page() {
           </a>
         </div>
       </section>
-
       <section className="py-20 max-md:py-10 bg-white px-6" id="pourquoi-nous">
         <div className="max-w-6xl mx-auto text-center">
           <h2 className="text-3xl font-bold mb-6 text-[#ddb859]">
@@ -132,7 +135,6 @@ export default function Page() {
           </div>
         </div>
       </section>
-
       <section
         className="w-full py-16 max-md:py-8 bg-white"
         id="nettoyage-service"
@@ -176,9 +178,50 @@ export default function Page() {
           </div>
         </div>
       </section>
+
+      <section className="w-full py-20 bg-gray-50" id="collections">
+        <div className="max-w-7xl mx-auto px-6 text-center">
+          <h2 className="text-4xl font-bold text-[#ddb859] mb-6">
+            Nos Collections
+          </h2>
+          <p className="text-gray-600 text-lg max-w-2xl mx-auto mb-12">
+            Découvrez nos différentes collections pensées pour sublimer chaque
+            espace de votre maison.
+          </p>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {[
+              { name: "Canape", image: canapeImg },
+              { name: "Fauteuille", image: fauteuilImg },
+              { name: "Lits", image: litImg },
+              { name: "Chaise", image: chaiseImg },
+            ].map((item) => (
+              <Link
+                key={item.name}
+                href={`/${item.name.toLowerCase()}`}
+                className="bg-white shadow-md rounded-lg overflow-hidden hover:scale-105 transition-transform duration-300"
+              >
+                <Image
+                  src={item.image}
+                  alt={item.name}
+                  className="w-full h-48 object-cover"
+                />
+                <div className="p-4">
+                  <h3 className="text-lg font-semibold text-gray-800 mb-2">
+                    {item.name}
+                  </h3>
+                  <p className="text-sm text-gray-600">
+                    Explorez notre sélection de {item.name.toLowerCase()} conçus
+                    avec soin et élégance.
+                  </p>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
       <Testimonials />
       <NosPartenaires />
-
       <section className="w-full py-16 max-md:py-8 px-4" id="contact">
         <div className="flex flex-col lg:flex-row items-center gap-8">
           {/* Form  */}

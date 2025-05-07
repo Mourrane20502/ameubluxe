@@ -1,8 +1,15 @@
 "use client";
 import Image from "next/image";
+import glovo from "../../assets/glovo.png";
+import haworth from "../../assets/haworth.png";
+import hoceimaHolding from "../../assets/hoceima.jpeg";
 import bmce from "../../assets/logobmce.png";
 
+const partners = [bmce, glovo, hoceimaHolding, haworth];
+
 export default function NosPartenaires() {
+  const repeatedPartners = [...partners, ...partners];
+
   return (
     <section className="bg-white py-16 overflow-hidden">
       <div className="max-w-6xl mx-auto text-center">
@@ -11,15 +18,15 @@ export default function NosPartenaires() {
         </h2>
 
         <div className="relative overflow-hidden">
-          <div className="flex w-[calc(250px*10)] animate-scroll whitespace-nowrap">
-            {Array.from({ length: 10 }).map((_, i) => (
-              <div key={i} className="inline-block w-[250px]  px-4">
+          <div className="flex w-max animate-scroll gap-12">
+            {repeatedPartners.map((logo, i) => (
+              <div key={i} className="flex-shrink-0 w-[200px]">
                 <Image
-                  src={bmce}
-                  alt="Adidas Logo"
+                  src={logo}
+                  alt={`Logo partenaire ${i + 1}`}
                   width={200}
-                  height={100}
-                  className="h-20 w-auto mx-auto  hover:grayscale-0 transition"
+                  height={200}
+                  className="h-20 w-auto mx-auto  transition duration-300"
                 />
               </div>
             ))}
@@ -38,7 +45,7 @@ export default function NosPartenaires() {
         }
 
         .animate-scroll {
-          animation: scroll 20s linear infinite;
+          animation: scroll 15s linear infinite;
         }
       `}</style>
     </section>

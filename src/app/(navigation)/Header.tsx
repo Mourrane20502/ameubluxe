@@ -1,25 +1,32 @@
 "use client";
 
+import useScroll from "@/hooks/useScroll"; // Import the useScroll hook
 import { ChevronDown, Menu, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import logo from "../../assets/logo.jpg";
+import logo from "../../assets/logo-removebg-preview (1).png";
 
 export default function MainHeader() {
   const [showDropdown, setShowDropdown] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
+  const scrolled = useScroll(50);
+
   return (
-    <header className="bg-white w-full shadow-md px-6 py-2 transition-all duration-300 ease-in-out">
+    <header
+      className={`w-full px-6 py-2 transition-all duration-500 ease-in-out ${
+        scrolled ? "fixed top-0 left-0 w-full z-50 shadow-md bg-white" : ""
+      }`}
+    >
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex items-center space-x-2">
           <Image
             src={logo}
             alt="Logo"
-            width={80}
-            height={80}
+            width={90}
+            height={90}
             className="rounded"
           />
         </Link>
@@ -42,7 +49,7 @@ export default function MainHeader() {
             onMouseLeave={() => setShowDropdown(false)}
           >
             <button className="flex items-center gap-1 hover:text-[#dbb350] transition-colors">
-              <Link href="/collections">Collections</Link>{" "}
+              <Link href="#collections">Collections</Link>{" "}
               <ChevronDown size={16} />
             </button>
 
@@ -52,7 +59,7 @@ export default function MainHeader() {
                 {["canape", "fauteuille", "lits", "chaise"].map((item) => (
                   <Link
                     key={item}
-                    href={`/collections/${item}`}
+                    href={item}
                     className="block px-4 py-2 hover:bg-gray-100 transition"
                   >
                     {item.charAt(0).toUpperCase() + item.slice(1)}
@@ -85,7 +92,6 @@ export default function MainHeader() {
         </button>
       </div>
 
-      {/* Fullscreen Mobile Menu Overlay */}
       <div
         className={`fixed inset-0 z-40 bg-[#dbb350] text-white transform transition-transform duration-300 ease-in-out ${
           mobileMenuOpen ? "translate-x-0" : "translate-x-full"
@@ -113,21 +119,19 @@ export default function MainHeader() {
           </Link>
 
           <div>
-            <Link href="/collections">
-              <p className="mb-2">Collections</p>
-              <div className="ml-4 space-y-2">
-                {["canape", "fauteuille", "lits", "chaise"].map((item) => (
-                  <Link
-                    key={item}
-                    href={`/collections/${item}`}
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="block"
-                  >
-                    {item.charAt(0).toUpperCase() + item.slice(1)}
-                  </Link>
-                ))}
-              </div>
-            </Link>
+            <p className="mb-2">Collections</p>
+            <div className="ml-4 space-y-2">
+              {["canape", "fauteuille", "lits", "chaise"].map((item) => (
+                <Link
+                  key={item}
+                  href={item}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="block"
+                >
+                  {item.charAt(0).toUpperCase() + item.slice(1)}
+                </Link>
+              ))}
+            </div>
           </div>
 
           <Link
