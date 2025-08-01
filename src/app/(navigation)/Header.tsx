@@ -20,18 +20,16 @@ export default function MainHeader() {
       }`}
     >
       <div className="max-w-7xl mx-auto flex items-center justify-between">
-        {/* Logo */}
         <Link href="/" className="flex items-center space-x-2">
           <Image
             src={logo}
             alt="Logo"
-            width={90}
-            height={90}
+            width={80}
+            height={80}
             className="rounded"
           />
         </Link>
 
-        {/* Desktop Nav */}
         <nav className="hidden md:flex space-x-6 text-[15px] font-medium text-gray-800">
           <Link href="/" className="hover:text-[#dbb350] transition-colors">
             Accueil

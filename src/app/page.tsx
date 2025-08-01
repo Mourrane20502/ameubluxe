@@ -1,3 +1,4 @@
+"use client"
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -5,7 +6,7 @@ import { Clock, ShieldCheck, Sparkles, Users } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import litImg from "../assets/40.jpg";
-import bgImage from "../assets/bgimage.jpg";
+import bgImage from "../assets/hero.jpg";
 import canapeImg from "../assets/canape.jpg";
 import chaiseImg from "../assets/chaise.jpg";
 import fauteuilImg from "../assets/feauteille.jpg";
@@ -13,8 +14,11 @@ import servicenettoyage from "../assets/service_de_nettoyage.jpg";
 import tapisserie from "../assets/tapisserie.jpg";
 import NosPartenaires from "./_components/NosPartenaires";
 import Testimonials from "./_components/Slider";
+import { FaArrowUp } from "react-icons/fa";
+import { useRef } from "react";
 
 export default function Page() {
+  const topSectionRef = useRef<HTMLDivElement>(null)
   const features = [
     {
       icon: <ShieldCheck className="text-[#ddb859]" size={32} />,
@@ -37,39 +41,50 @@ export default function Page() {
       desc: "Chaque projet est unique : nous vous conseillons et vous accompagnons à chaque étape.",
     },
   ];
+  const moveToTopSection = () => {
+  if (topSectionRef && topSectionRef.current) {
+    topSectionRef.current.scrollIntoView({ behavior: "smooth" });
+  }
+};
+
+  
   return (
-    <>
-      <section className="relative w-full h-[80vh]">
+    <div ref={topSectionRef}>
+    <div className="fixed z-50 right-8 bottom-8 ">
+      <FaArrowUp onClick={moveToTopSection} className="cursor-pointer"  size={30} fill="#ddb859" />
+    </div>
+      <section className="relative w-full h-screen">
         <Image
           src={bgImage}
           alt="Background"
           fill
           className="object-cover"
           priority
+        
         />
 
-        <div className="absolute inset-0 bg-black/75" />
+        <div className="absolute inset-0 bg-black/55" />
 
         <div className="absolute inset-0 flex flex-col items-center gap-2 justify-center text-center text-white px-6">
-          <h1 className="text-5xl sm:text-6xl font-semibold mb-4">
-            chez Ameublux
+          <h1 className="text-5xl md:text-7xl font-semibold mb-4">
+            Chez <span className="text-[#dbb350]">Ameubluxe</span>
           </h1>
-          <p className="text-lg sm:text-xl max-w-2xl mb-6">
+          <p className="text-lg sm:text-xl font-light max-w-2xl mb-6">
             Tapisserie sur mesure, nettoyage professionnel, collections uniques
             — l’élégance au cœur de votre maison.
           </p>
 
-          <a
+          <Link
             href="#collections"
             className="px-8 py-3 text-lg font-semibold text-white rounded-full shadow-lg bg-[#ddb859] hover:text-[#ddb859] hover:bg-white transition-all duration-300"
           >
             Voir les collections
-          </a>
+          </Link>
         </div>
       </section>
       <section className="py-20 max-md:py-10 bg-white px-6" id="pourquoi-nous">
         <div className="max-w-6xl mx-auto text-center">
-          <h2 className="text-3xl font-bold mb-6 text-[#ddb859]">
+          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-[#ddb859]">
             Pourquoi Nous Choisir ?
           </h2>
           <p className="text-gray-600 text-lg mb-12 max-w-2xl mx-auto">
@@ -285,6 +300,6 @@ export default function Page() {
           </div>
         </div>
       </section>
-    </>
+    </div>
   );
 }

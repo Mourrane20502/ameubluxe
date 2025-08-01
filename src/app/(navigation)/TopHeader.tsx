@@ -14,18 +14,15 @@ export default function TopHeader() {
       {!scrolled && (
         <div className="w-full bg-[#dbb350] text-white px-4 sm:px-8 py-3 text-sm">
           <div className="flex flex-col md:flex-row items-center justify-between gap-2 md:gap-0">
-            {/* Phone section */}
             <div className="flex items-center gap-2 text-md">
               <Phone size={16} />
               <span className="font-medium">+212 661-673158</span>
             </div>
 
-            {/* Delivery text */}
             <p className="text-center text-[15px] md:text-[16px]">
               Livraison à domicile partout au Maroc
             </p>
 
-            {/* Social icons */}
             <div className="flex items-center gap-4 text-lg">
               <a
                 href="https://www.tiktok.com"
