@@ -1,101 +1,70 @@
-"use client";
-
-import { ChevronLeft, ChevronRight } from "lucide-react";
-import Image from "next/image";
-import { useState } from "react";
-import nadia from "../../assets/nadia.avif";
-
+import { Star } from "lucide-react";
+import nadiaImage from "../../assets/nadia.avif"
 const testimonials = [
   {
-    name: "Nadia El Idrissi",
-    location: "Casablanca",
-    content:
-      "Un service irréprochable ! Mon canapé a retrouvé une seconde jeunesse. L'équipe Ameublux est professionnelle, ponctuelle et très à l'écoute. Je recommande les yeux fermés.",
-    avatar: nadia,
+    name: "Sophie Martin",
+    role: "Propriétaire",
+    content: "Ameubluxe a transformé notre salon avec des meubles sur mesure d'une qualité exceptionnelle. Le service client est remarquable.",
+    rating: 5,
+    image : nadiaImage
   },
   {
-    name: "Youssef Benali",
-    location: "Rabat",
-    content:
-      "La qualité du tissu et la précision des finitions sont impressionnantes. Ameublux m’a aidé à redonner vie à mes fauteuils en un temps record.",
-    avatar: nadia,
+    name: "Ahmed Benali",
+    role: "Architecte d'intérieur",
+    content: "Je collabore régulièrement avec Ameubluxe pour mes projets. Leur expertise en tapisserie est inégalée au Maroc.",
+    rating: 5,
+        image : nadiaImage
+
   },
   {
-    name: "Fatima Zahra Amrani",
-    location: "Marrakech",
-    content:
-      "J'ai été bluffée par le professionnalisme de l'équipe. Le résultat est au-delà de mes attentes. Merci Ameublux pour votre passion du détail.",
-    avatar: nadia,
-  },
-  {
-    name: "Rachid El Mansouri",
-    location: "Tanger",
-    content:
-      "Le service client est exceptionnel. J’ai été accompagné à chaque étape du projet. Mon salon est maintenant magnifique et confortable.",
-    avatar: nadia,
+    name: "Marie Dubois",
+    role: "Cliente fidèle",
+    content: "Trois ans après l'achat, nos fauteuils sont toujours comme neufs. La qualité des matériaux est exceptionnelle.",
+    rating: 5,
+        image : nadiaImage
+
   },
 ];
 
-export default function Testimonials() {
-  const [index, setIndex] = useState(0);
-
-  const next = () => setIndex((prev) => (prev + 1) % testimonials.length);
-  const prev = () =>
-    setIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
-
-  const current = testimonials[index];
-
+const TestimonialsSection = () => {
   return (
-    <section
-      className="w-full bg-gradient-to-br from-white to-[#f9f7f1] py-20 px-6"
-      id="testimonials"
-    >
-      <div className="max-w-4xl mx-auto text-center">
-        <h2 className="text-4xl font-bold text-[#ddb859] mb-4">
+    <section className="py-20 bg-white">
+      <div className="max-w-6xl mx-auto px-6 text-center">
+        <h2 className="text-4xl md:text-5xl font-bold text-[#ddb859] mb-8 font-heading">
           Ce que disent nos clients
         </h2>
-        <p className="text-gray-600 text-lg mb-12">
-          Des témoignages authentiques de nos clients satisfaits partout au
-          Maroc.
+        <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-16">
+          La satisfaction de nos clients est notre plus belle récompense.
         </p>
 
-        <div className="relative bg-white border border-gray-100 rounded-3xl shadow-xl p-8 md:p-10 transition-all duration-500 ease-in-out">
-          <p className="text-gray-700 text-lg leading-relaxed italic mb-8 transition-opacity duration-500 ease-in-out">
-            “{current.content}”
-          </p>
-
-          <div className="flex flex-col items-center">
-            <Image
-              src={current.avatar}
-              alt={current.name}
-              width={80}
-              height={80}
-              className="rounded-full border-4 border-[#ddb859] mb-3 object-cover hover:scale-105 transition-transform"
-            />
-            <p className="font-semibold text-gray-800 text-xl">
-              {current.name}
-            </p>
-            <p className="text-sm text-gray-500">{current.location}</p>
-          </div>
-
-          <div className="flex justify-center gap-6 mt-8">
-            <button
-              onClick={prev}
-              className="bg-[#ddb859] hover:bg-[#c7a74b] text-white p-2 rounded-full shadow-md transition"
-              aria-label="Précédent"
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {testimonials.map((testimonial, index) => (
+            <div
+              key={index}
+              className="bg-card p-8 shadow-sm rounded-2xl shadow-soft hover:shadow-luxury transition-all duration-300 text-left"
             >
-              <ChevronLeft className="w-5 h-5" />
-            </button>
-            <button
-              onClick={next}
-              className="bg-[#ddb859] hover:bg-[#c7a74b] text-white p-2 rounded-full shadow-md transition"
-              aria-label="Suivant"
-            >
-              <ChevronRight className="w-5 h-5" />
-            </button>
-          </div>
+              <div className="flex items-center mb-4">
+                {[...Array(testimonial.rating)].map((_, i) => (
+                  <Star key={i} className="w-5 h-5 text-primary fill-[#ddb859] " color="[#ddb859] " />
+                ))}
+              </div>
+              <p className="text-muted-foreground mb-6 leading-relaxed italic">
+                {testimonial.content}
+              </p>
+              <div>
+                <h4 className="font-semibold text-card-foreground">
+                  {testimonial.name}
+                </h4>
+                <p className="text-sm text-muted-foreground">
+                  {testimonial.role}
+                </p>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </section>
   );
-}
+};
+
+export default TestimonialsSection;
