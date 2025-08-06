@@ -8,16 +8,12 @@ import { notFound } from "next/navigation";
 import { useState } from "react";
 import { FaWhatsapp } from "react-icons/fa";
 
-interface Props {
-  params: {
-    name: string;
-  };
-}
+
 type TabType = "description" | "caracteristiques" | "specifications";
 
 const tabs: TabType[] = ["description", "caracteristiques", "specifications"];
 
-export default function ProductPage({ params }: Props) {
+export default function ProductPage({ params }: { params: { name: string } }) {
   const decodedName = decodeURIComponent(params.name);
 
   const product = products.find((p) => p.name === decodedName);
