@@ -1,5 +1,5 @@
 import { Star, Award, Users, Palette, Clock, Shield } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { motion, Variants } from 'framer-motion';
 
 const features = [
   {
@@ -40,32 +40,36 @@ const features = [
   }
 ];
 
-const cardVariants = {
+const cardVariants: Variants = {
   offscreen: { opacity: 0, y: 40 },
-  onscreen: (custom: number) => ({
+  onscreen: {
     opacity: 1,
     y: 0,
     transition: {
-      delay: custom * 0.15,
       type: "spring",
       stiffness: 50,
-      damping: 20
-    }
-  }),
+      damping: 20,
+    },
+  },
   hover: {
     scale: 1.05,
     boxShadow: "0 12px 40px rgba(221, 184, 89, 0.5)",
-    transition: { duration: 0.3 }
-  }
+    transition: { duration: 0.3 },
+  },
+};
+
+const containerVariants: Variants = {
+  offscreen: {},
+  onscreen: {
+    transition: {
+      staggerChildren: 0.15,
+    },
+  },
 };
 
 const WhyAmeubluxe = () => {
   return (
-    <section
-      className="py-24 px-4 md:px-6"
-      id="pourquoi-nous"
-     
-    >
+    <section className="py-24 px-4 md:px-6" id="pourquoi-nous">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-20 px-4">
           <div
@@ -85,11 +89,10 @@ const WhyAmeubluxe = () => {
             Pourquoi choisir{' '}
             <span
               style={{
-                background:
-                  'linear-gradient(135deg, #ddb859 0%, #b28f1e 100%)',
+                background: 'linear-gradient(135deg, #ddb859 0%, #b28f1e 100%)',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
-                display: 'inline-block'
+                display: 'inline-block',
               }}
             >
               Ameubluxe
@@ -109,23 +112,24 @@ const WhyAmeubluxe = () => {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
+        <motion.div
+          className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10"
+          initial="offscreen"
+          whileInView="onscreen"
+          viewport={{ once: true, amount: 0.3 }}
+          variants={containerVariants}
+        >
           {features.map((feature, index) => (
             <motion.div
               key={index}
-              className="relative rounded-2xl p-8 border overflow-hidden shadow transition-colors duration-300"
+              className="relative rounded-2xl p-8 border overflow-hidden shadow transition-colors duration-300 cursor-pointer"
               style={{
                 backgroundColor: '#f9f9f9',
                 borderColor: 'rgba(211, 211, 211, 0.5)',
                 boxShadow: '0 4px 10px rgba(221, 184, 89, 0.15)',
-                cursor: 'pointer',
                 zIndex: 0,
               }}
               variants={cardVariants}
-              initial="offscreen"
-              whileInView="onscreen"
-              viewport={{ once: true, amount: 0.3 }}
-              custom={index}
               whileHover="hover"
             >
               <div
@@ -133,10 +137,9 @@ const WhyAmeubluxe = () => {
                 style={{
                   width: '80px',
                   height: '80px',
-                  background:
-                    'linear-gradient(135deg, #ddb859 0%, #b28f1e 100%)',
+                  background: 'linear-gradient(135deg, #ddb859 0%, #b28f1e 100%)',
                   opacity: 0.05,
-                  zIndex: 0
+                  zIndex: 0,
                 }}
               ></div>
 
@@ -144,9 +147,8 @@ const WhyAmeubluxe = () => {
                 <div
                   className="w-16 h-16 rounded-2xl flex items-center justify-center shadow-sm transition-transform duration-500"
                   style={{
-                    background:
-                      'linear-gradient(135deg, #fff8dc 0%, #f0e6a9 100%)',
-                    boxShadow: '0 1px 4px rgba(221, 184, 89, 0.2)'
+                    background: 'linear-gradient(135deg, #fff8dc 0%, #f0e6a9 100%)',
+                    boxShadow: '0 1px 4px rgba(221, 184, 89, 0.2)',
                   }}
                 >
                   {feature.icon}
@@ -162,7 +164,7 @@ const WhyAmeubluxe = () => {
                       width: '8px',
                       height: '8px',
                       backgroundColor: '#ddb859',
-                      animation: 'pulse 2s infinite'
+                      animation: 'pulse 2s infinite',
                     }}
                   ></div>
                   <span style={{ color: '#3a3a3a' }} className="text-xs font-medium">
@@ -186,8 +188,7 @@ const WhyAmeubluxe = () => {
               <motion.div
                 className="absolute bottom-0 left-0 w-full h-1 origin-left"
                 style={{
-                  background:
-                    'linear-gradient(135deg, #ddb859 0%, #b28f1e 100%)',
+                  background: 'linear-gradient(135deg, #ddb859 0%, #b28f1e 100%)',
                   transformOrigin: 'left',
                 }}
                 initial={{ scaleX: 0 }}
@@ -196,7 +197,7 @@ const WhyAmeubluxe = () => {
               />
             </motion.div>
           ))}
-        </div>
+        </motion.div>
 
         {/* Bottom CTA */}
         <div
@@ -204,14 +205,11 @@ const WhyAmeubluxe = () => {
           style={{
             backgroundColor: '#f9f9f9',
             borderColor: 'rgba(221, 184, 89, 0.15)',
-            boxShadow: '0 8px 30px rgba(221, 184, 89, 0.3)'
+            boxShadow: '0 8px 30px rgba(221, 184, 89, 0.3)',
           }}
         >
           <div className="flex-1 text-left">
-            <h3
-              className="text-2xl font-bold mb-2"
-              style={{ color: '#3a3a3a' }}
-            >
+            <h3 className="text-2xl font-bold mb-2" style={{ color: '#3a3a3a' }}>
               Prêt à transformer votre espace ?
             </h3>
             <p style={{ color: '#7a7a7a' }}>
@@ -222,10 +220,9 @@ const WhyAmeubluxe = () => {
             <button
               className="px-8 py-4 font-semibold rounded-xl shadow transition-transform duration-300 hover:scale-105"
               style={{
-                background:
-                  'linear-gradient(135deg, #ddb859 0%, #b28f1e 100%)',
+                background: 'linear-gradient(135deg, #ddb859 0%, #b28f1e 100%)',
                 color: '#3a3a3a',
-                boxShadow: '0 8px 30px rgba(221, 184, 89, 0.5)'
+                boxShadow: '0 8px 30px rgba(221, 184, 89, 0.5)',
               }}
             >
               Devis Gratuit
@@ -235,7 +232,7 @@ const WhyAmeubluxe = () => {
               style={{
                 borderColor: '#ddb859',
                 color: '#ddb859',
-                backgroundColor: 'transparent'
+                backgroundColor: 'transparent',
               }}
             >
               Voir Portfolio
