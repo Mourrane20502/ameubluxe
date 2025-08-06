@@ -8,27 +8,7 @@ const canapes = products.filter((p) => p.category === "canape");
 export default function CanapePage() {
   return (
     <div className="relative min-h-screen">
-       <header className="fixed top-0 left-0 w-full bg-white shadow-md z-50">
-      <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-        <Link href="/" className="text-2xl font-bold text-[#dbb350] hover:text-[#caa13f]">
-          Ameubluxe
-        </Link>
-        <nav className="space-x-6 text-gray-700">
-          <Link href="/" className="hover:text-[#dbb350]">
-            Accueil
-          </Link>
-          <Link href="/canape" className="hover:text-[#dbb350] font-semibold">
-            Canapés
-          </Link>
-            <Link href="/canape" className="hover:text-[#dbb350] font-semibold">
-            Canapés
-          </Link>
-            <Link href="/canape" className="hover:text-[#dbb350] font-semibold">
-            Canapés
-          </Link>
-        </nav>
-      </div>
-    </header>
+    
       <div className="fixed z-50 top-24 left-6 hidden md:block">
         <Link href="/" className="flex items-center text-[#dbb350] hover:text-[#caa13f] transition">
           <ChevronLeft size={28} />

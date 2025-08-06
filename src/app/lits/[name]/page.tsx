@@ -4,25 +4,45 @@ import { products } from "@/data/data";
 import { Check, CheckCircle, ShieldCheck, Truck } from "lucide-react";
 import Image, { StaticImageData } from "next/image";
 import Link from "next/link";
-import { notFound } from "next/navigation";
-import { useState } from "react";
+import { useParams, useRouter } from "next/navigation";
+import { useState, useEffect } from "react";
 import { FaWhatsapp } from "react-icons/fa";
 
-
 type TabType = "description" | "caracteristiques" | "specifications";
-
 const tabs: TabType[] = ["description", "caracteristiques", "specifications"];
 
-export default function ProductPage({ params }: { params: { name: string } }) {
-  const decodedName = decodeURIComponent(params.name);
+export default function ProductPage() {
+  const params = useParams();
+  const router = useRouter();
 
-  const product = products.find((p) => p.name === decodedName);
-  const [mainImage, setMainImage] = useState<string | StaticImageData>(
-    product?.productImages?.[0] || product?.image || "/placeholder.png"
-  );
+  // Handle possible string | string[] for name param:
+  let name = params?.name;
+  if (Array.isArray(name)) {
+    name = name[0]; // fallback to first if array
+  }
+
+  // Always call hooks unconditionally
   const [selectedTab, setSelectedTab] = useState<TabType>("description");
+  const [mainImage, setMainImage] = useState<string | StaticImageData>("/placeholder.png");
 
-  if (!product) return notFound();
+  // Find product based on name param
+  const product = name ? products.find((p) => p.name === decodeURIComponent(name!)) : undefined;
+
+  // Update mainImage state when product changes
+  useEffect(() => {
+    if (product) {
+      setMainImage(product.productImages?.[0] || product.image || "/placeholder.png");
+    }
+  }, [product]);
+
+  // Redirect if no product found
+  useEffect(() => {
+    if (name && !product) {
+      router.replace("/404");
+    }
+  }, [name, product, router]);
+
+  if (!product) return null; // or a loading spinner
 
   const whatsappMessage = encodeURIComponent(`Je suis intéressé par ce produit: ${product.name}`);
 
@@ -75,17 +95,18 @@ export default function ProductPage({ params }: { params: { name: string } }) {
             </div>
           </div>
 
+          {/* Right column: details */}
           <div className="flex flex-col gap-4">
             <div className="bg-gray-200 px-3 py-1 rounded-full text-gray-700 w-max">{product.category}</div>
             <h1 className="text-3xl sm:text-4xl font-bold text-[#222]">{product.name}</h1>
 
-              {product.stars && product.stars > 0 && (
-    <div className="flex gap-1 text-yellow-400 text-3xl">
-      {Array.from({ length: 5 }, (_, i) => (
-        <span key={i}>{i < (product.stars ?? 0) ? "★" : "☆"}</span>
-      ))}
-    </div>
-  )}
+            {product.stars && product.stars > 0 && (
+              <div className="flex gap-1 text-yellow-400 text-3xl">
+               {Array.from({ length: 5 }, (_, i) => (
+  <span key={i}>{i < (product.stars ?? 0) ? "★" : "☆"}</span>
+))}
+              </div>
+            )}
 
             <p className="text-xl sm:text-2xl font-semibold text-[#dbb350]">{product.price.toLocaleString()} DH</p>
 
@@ -136,7 +157,7 @@ export default function ProductPage({ params }: { params: { name: string } }) {
                 ))}
               </nav>
 
-              <div className="mt-4 text-gray-700 text-base leading-relaxed max-w-full  whitespace-pre-line">
+              <div className="mt-4 text-gray-700 text-base leading-relaxed max-w-full whitespace-pre-line">
                 {selectedTab === "description" && <p>{product.description}</p>}
 
                 {selectedTab === "caracteristiques" && (
