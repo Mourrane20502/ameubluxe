@@ -1,6 +1,6 @@
 "use client";
 
-import useScroll from "@/hooks/useScroll"; // Import the useScroll hook
+import useScroll from "@/hooks/useScroll"; 
 import { ChevronDown, Menu, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -35,7 +35,7 @@ export default function MainHeader() {
             Accueil
           </Link>
           <Link
-            href="#tapisserie"
+            href="#about"
             className="hover:text-[#dbb350] transition-colors"
           >
             Tapisserie sur mesure
@@ -51,7 +51,6 @@ export default function MainHeader() {
               <ChevronDown size={16} />
             </button>
 
-            {/* Desktop Dropdown */}
             {showDropdown && (
               <div className="absolute top-full left-0 mt-2 bg-white border rounded shadow-lg z-50">
                 {["canape", "fauteuille", "lits", "chaise"].map((item) => (
@@ -68,10 +67,10 @@ export default function MainHeader() {
           </div>
 
           <Link
-            href="#nettoyage-service"
+            href="#realisations"
             className="hover:text-[#dbb350] transition-colors"
           >
-            Nettoyage professionnelle
+             Réalisations
           </Link>
           <Link
             href="#contact"
@@ -81,7 +80,6 @@ export default function MainHeader() {
           </Link>
         </nav>
 
-        {/* Hamburger Icon */}
         <button
           className="md:hidden text-gray-800 z-50"
           onClick={() => setMobileMenuOpen(true)}
@@ -112,7 +110,7 @@ export default function MainHeader() {
           <Link href="/" onClick={() => setMobileMenuOpen(false)}>
             Accueil
           </Link>
-          <Link href="#tapisserie" onClick={() => setMobileMenuOpen(false)}>
+          <Link href="#about" onClick={() => setMobileMenuOpen(false)}>
             Tapisserie sur mesure
           </Link>
 
@@ -133,10 +131,10 @@ export default function MainHeader() {
           </div>
 
           <Link
-            href="#nettoyage-service"
+            href="#realisations"
             onClick={() => setMobileMenuOpen(false)}
           >
-            Nettoyage professionnelle
+             Réalisations
           </Link>
           <Link href="#contact" onClick={() => setMobileMenuOpen(false)}>
             Contact

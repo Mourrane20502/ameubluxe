@@ -3,56 +3,99 @@ import { ChevronLeft } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
-const canapes = products.filter((p) => p.category === "chaise");
+const chaises = products.filter((p) => p.category === "chaise");
 
 export default function ChaisePage() {
   return (
-    <div className="relative  min-h-screen">
+    <div className="bg-white min-h-screen text-gray-800">
+      {/* Hero Header */}
+      <header className="relative bg-[url('/your-chaise-header.jpg')] bg-cover bg-center h-72 flex items-center justify-center text-white">
+        <div className="absolute inset-0 bg-black/50" />
+        <div className="relative z-10 text-center px-6">
+          <h1 className="text-4xl md:text-5xl font-semibold tracking-tight mb-2">
+            Collection de Chaises
+          </h1>
+          <p className="text-md md:text-lg max-w-xl mx-auto">
+            Élégantes, confortables, et conçues pour sublimer tous les intérieurs.
+          </p>
+        </div>
+      </header>
+
+      {/* Fixed Return Button */}
       <div className="fixed z-50 top-24 left-6 hidden md:block">
-        <Link href="/" className="flex items-center text-[#dbb350] hover:text-[#caa13f] transition">
+        <Link
+          href="/"
+          className="flex items-center text-[#dbb350] hover:text-[#caa13f] transition"
+        >
           <ChevronLeft size={28} />
           <span className="ml-2 font-medium">Retour</span>
         </Link>
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 py-20">
-        <div className="mb-6 text-sm text-gray-500">
-          <Link href="/" className="hover:underline">Accueil</Link>
+      {/* Main Section */}
+      <main className="max-w-7xl mx-auto px-6 py-20">
+        {/* Breadcrumb */}
+        <nav className="mb-6 text-sm text-gray-500">
+          <Link href="/" className="hover:underline">
+            Accueil
+          </Link>
           <span className="mx-2">{'>'}</span>
-          <span className="text-[#dbb350] font-semibold">Chaise</span>
-        </div>
+          <span className="text-[#dbb350] font-medium">Chaises</span>
+        </nav>
 
-        <h1 className="text-4xl font-bold mb-10 text-[#dbb350]">Chaise</h1>
+        {/* Title */}
+        <h2 className="text-4xl md:text-5xl font-semibold text-[#dbb350] mb-12">
+          Nos Chaises
+        </h2>
 
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-          {canapes.map((product) => (
+        {/* Product Grid */}
+        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
+          {chaises.map((product) => (
             <div
               key={product.id}
-              className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition duration-300"
+              className="group relative bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300"
             >
-              <Image
-                src={product.image}
-                alt={product.name}
-                width={400}
-                height={300}
-                className="w-full h-64 object-cover"
-              />
-              <div className="p-5">
-                <h2 className="text-xl font-semibold mb-1">{product.name}</h2>
-                <p className="font-bold text-[#dbb350] text-lg mb-4">
-                  {product.price.toLocaleString()} DH
-                </p>
-                <Link
-                  href={`/canape/${product.name}`}
-                  className="inline-block bg-[#dbb350] text-white px-4 py-2 rounded hover:bg-[#caa13f] transition"
-                >
-                  Voir le produit
-                </Link>
+              {/* Image with badge */}
+              <div className="relative">
+                <Image
+                  src={product.image}
+                  alt={product.name}
+                  width={500}
+                  height={300}
+                  className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+                <div className="absolute top-3 left-3 bg-[#dbb350] text-white text-xs font-medium px-3 py-1 rounded-full shadow-sm">
+                  Élégance
+                </div>
+              </div>
+
+              {/* Info */}
+              <div className="p-6 flex flex-col justify-between h-[220px]">
+                <div>
+                  <h3 className="text-lg font-medium text-gray-800 mb-1">
+                    {product.name}
+                  </h3>
+                  <p className="text-[#dbb350] font-semibold text-base mb-3">
+                    {product.price.toLocaleString()} DH
+                  </p>
+                  <p className="text-sm text-gray-600 leading-relaxed">
+                    Fabriquée avec soin, parfaite pour votre salle à manger ou bureau.
+                  </p>
+                </div>
+
+                <div className="mt-5">
+                  <Link
+                    href={`/chaise/${product.name}`}
+                    className="inline-block text-sm px-5 py-2 bg-[#dbb350] text-white rounded-full font-medium hover:bg-[#caa13f] transition"
+                  >
+                    Voir le produit
+                  </Link>
+                </div>
               </div>
             </div>
           ))}
         </div>
-      </div>
+      </main>
     </div>
   );
 }

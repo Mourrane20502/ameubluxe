@@ -1,5 +1,6 @@
 import { Star, Award, Users, Palette, Clock, Shield } from 'lucide-react';
 import { motion, Variants } from 'framer-motion';
+import Link from 'next/link';
 
 const features = [
   {
@@ -69,7 +70,7 @@ const containerVariants: Variants = {
 
 const WhyAmeubluxe = () => {
   return (
-    <section className="py-24 px-4 md:px-6" id="pourquoi-nous">
+    <section className="py-4 px-4 md:px-6" id="pourquoi-nous">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-20 px-4">
           <div
@@ -199,7 +200,6 @@ const WhyAmeubluxe = () => {
           ))}
         </motion.div>
 
-        {/* Bottom CTA */}
         <div
           className="text-center mt-20 rounded-2xl p-8 border flex flex-col md:flex-row items-center gap-6"
           style={{
@@ -225,7 +225,8 @@ const WhyAmeubluxe = () => {
                 boxShadow: '0 8px 30px rgba(221, 184, 89, 0.5)',
               }}
             >
-              Devis Gratuit
+              <Link href='#collections'>  Nos Collections</Link>
+          
             </button>
             <button
               className="px-8 py-4 font-semibold rounded-xl border-2 transition-colors duration-300 hover:text-[#3a3a3a] hover:bg-[#ddb859]"
@@ -235,7 +236,7 @@ const WhyAmeubluxe = () => {
                 backgroundColor: 'transparent',
               }}
             >
-              Voir Portfolio
+               <Link href='#realisations'>Voir Portfolio</Link>
             </button>
           </div>
         </div>
